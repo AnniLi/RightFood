@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+include(F:\Qt\QTxlsx\src\xlsx\qtxlsx.pri)
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -13,8 +14,14 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    FoodItem.cpp \
+    DailyRecommendedNutrition.cpp \
+    TotalNutrition.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    FoodItem.h \
+    DailyRecommendedNutrition.h \
+    TotalNutrition.h
 
 FORMS    += mainwindow.ui
