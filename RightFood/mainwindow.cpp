@@ -24,16 +24,10 @@ MainWindow::MainWindow(QWidget *parent)
     completer->setCompletionMode(QCompleter::PopupCompletion);
     ui->lineEdit->setCompleter(completer);
 
-    ui->tableWidget->insertRow(0);
     ui->tableWidget->insertColumn(0);
     ui->tableWidget->insertColumn(1);
-    QTableWidgetItem *item;
-    item = new QTableWidgetItem("editable");
-    ui->tableWidget->setItem(0,0,item);
 
-        item = new QTableWidgetItem("non editable");
-        item->setFlags(item->flags() & ~Qt::ItemIsEditable); // non editable
-        ui->tableWidget->setItem(0,1,item);
+
 
 
 
@@ -42,6 +36,25 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow(){
     delete ui;
 }
+
+void MainWindow::foodAdedToRation(int rowId, QString name, int weight) {
+    _totalNutrion->add(rowId, weight);
+
+    //table widget
+    int rows = ui->tableWidget->rowCount();
+    ui->tableWidget->insertRow(rows);
+
+    QTableWidgetItem *item;
+    item = new QTableWidgetItem(QString("%1").arg(weight));
+    item->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    ui->tableWidget->setItem(rows,1,item);
+
+    item = new QTableWidgetItem(name);
+    item->setFlags(item->flags() & ~Qt::ItemIsEditable); // non editable
+    ui->tableWidget->setItem(rows,0,item);
+}
+
+
 
 void MainWindow::barsInit() {
     _nutritionBarList.resize(_barCount);
@@ -117,7 +130,7 @@ void MainWindow::on_toolButton_clicked() {
             if (QXlsx::Cell *cell = xlsx.cellAt(row, 2))
                 if(cell->value().toString() == foodName){
                     rowId = row;
-                    emit foodAdedToRation(foodName, foodWeight.toInt());
+                    emit foodAdedToRation(rowId, foodName, foodWeight.toInt());
                     return;
                 }
             else return;

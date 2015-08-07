@@ -518,6 +518,13 @@ public:
         tableWidget = new QTableWidget(centralWidget);
         tableWidget->setObjectName(QStringLiteral("tableWidget"));
         tableWidget->setGeometry(QRect(800, 150, 251, 192));
+        tableWidget->setShowGrid(false);
+        tableWidget->setCornerButtonEnabled(false);
+        tableWidget->setColumnCount(0);
+        tableWidget->horizontalHeader()->setVisible(false);
+        tableWidget->horizontalHeader()->setHighlightSections(false);
+        tableWidget->verticalHeader()->setVisible(false);
+        tableWidget->verticalHeader()->setHighlightSections(false);
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));

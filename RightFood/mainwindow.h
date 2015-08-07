@@ -20,8 +20,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-signals:
-    void foodAdedToRation(QString, int);
+//signals:
+    void foodAdedToRation(int, QString, int);
 
 private slots:
     void on_toolButton_clicked();
@@ -33,7 +33,7 @@ private:
     const int _barCount = 30;
     QVector<int> _dailyNutrition;
     TotalNutrition *_totalNutrion;
-    const QString _tableName = "FoodLost.xlsx";
+    const QString _tableName = "FoodList.xlsx";
 
     void barsInit();
     void getBars();
