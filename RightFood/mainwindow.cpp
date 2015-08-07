@@ -127,15 +127,15 @@ void MainWindow::on_toolButton_clicked() {
         QXlsx::Document xlsx(_tableName);
         int rowId = 0;
         for (int row = 2; ; row++) {
-            if (QXlsx::Cell *cell = xlsx.cellAt(row, 2))
+            if (QXlsx::Cell *cell = xlsx.cellAt(row, 2)) {
                 if(cell->value().toString() == foodName){
                     rowId = row;
                     emit foodAdedToRation(rowId, foodName, foodWeight.toInt());
                     return;
                 }
+            }
             else return;
         }
     }
-    else
-        ui->lineEdit->setText("");
+    ui->lineEdit->setText("");
 }
