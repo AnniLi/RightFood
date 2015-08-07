@@ -7,6 +7,7 @@
 #include <QStringListModel>
 #include <QInputDialog>
 #include <QStandardItemModel>
+#include <QPointer>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -26,11 +27,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->tableWidget->insertColumn(0);
     ui->tableWidget->insertColumn(1);
-
-
-
-
-
+    ui->tableWidget->insertColumn(2);
+    ui->tableWidget->setColumnWidth(0, 200);
+    ui->tableWidget->setColumnWidth(1, 49);
+    ui->tableWidget->setColumnHidden(2, 1);
+    connect(_totalNutrion, SIGNAL(totalNutritionChanged()), this, SLOT(setBars()));
 }
 
 MainWindow::~MainWindow(){
@@ -47,11 +48,15 @@ void MainWindow::foodAdedToRation(int rowId, QString name, int weight) {
     QTableWidgetItem *item;
     item = new QTableWidgetItem(QString("%1").arg(weight));
     item->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
-    ui->tableWidget->setItem(rows,1,item);
+    ui->tableWidget->setItem(rows, 1, item);
 
     item = new QTableWidgetItem(name);
     item->setFlags(item->flags() & ~Qt::ItemIsEditable); // non editable
-    ui->tableWidget->setItem(rows,0,item);
+    ui->tableWidget->setItem(rows, 0, item);
+
+    item = new QTableWidgetItem(rowId);
+    item->setFlags(item->flags() & ~Qt::ItemIsEditable); // non editable
+    ui->tableWidget->setItem(rows, 2, item);
 }
 
 
@@ -127,15 +132,27 @@ void MainWindow::on_toolButton_clicked() {
         QXlsx::Document xlsx(_tableName);
         int rowId = 0;
         for (int row = 2; ; row++) {
-            if (QXlsx::Cell *cell = xlsx.cellAt(row, 2))
+            if (QXlsx::Cell *cell = xlsx.cellAt(row, 2)) {
                 if(cell->value().toString() == foodName){
                     rowId = row;
                     emit foodAdedToRation(rowId, foodName, foodWeight.toInt());
                     return;
                 }
+            }
             else return;
         }
     }
-    else
-        ui->lineEdit->setText("");
+    ui->lineEdit->setText("");
 }
+
+void MainWindow::setBars() {
+    QVector<int> totalNutrion = _totalNutrion->getTotalNutrion();
+    for (int i = 0; i < _barCount; i++)
+        if (_nutritionBarList[i] != nullptr) {
+            if (totalNutrion[i] > _nutritionBarList[i]->maximum())
+                totalNutrion[i] = _nutritionBarList[i]->maximum();
+            _nutritionBarList[i]->setValue(totalNutrion[i]);
+        }
+}
+
+

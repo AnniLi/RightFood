@@ -12,6 +12,7 @@ public:
     FoodItem(int rowId, int weight,QObject *parent = 0);
     QVector<int> getFoodItemValue();
     QString name();
+    int rowId();
 
 signals:
     void weightChanged();

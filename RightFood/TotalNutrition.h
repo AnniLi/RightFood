@@ -11,8 +11,11 @@ class TotalNutrition : public QObject {
 public:
     TotalNutrition(QObject *parent = 0);
     void add(int rowId, int weight);
-    void remove(QString foodName);
+    void remove(int rowId);
     QVector<int> getTotalNutrion();
+
+public slots:
+    void changeWeight(int rowId, int weight);
 
 signals:
     void rationChanged();

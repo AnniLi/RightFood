@@ -7,6 +7,7 @@
 #include "TotalNutrition.h"
 #include <QAbstractItemModel>
 #include <QCompleter>
+#include <QTableWidgetItem>
 
 namespace Ui {
 class MainWindow;
@@ -19,12 +20,11 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-
-//signals:
     void foodAdedToRation(int, QString, int);
 
 private slots:
     void on_toolButton_clicked();
+    void setBars();
 
 private:
     Ui::MainWindow *ui;

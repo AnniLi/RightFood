@@ -2,12 +2,13 @@
 #include "xlsxdocument.h"
 
 FoodItem::FoodItem(QObject *parent) : QObject(parent) {
-
+    setFoodItemValue();
 }
 
 FoodItem::FoodItem(int rowId, int weight, QObject *parent)
     :QObject(parent),_rowId(rowId), _weight(weight) {
     _name = "";
+    setFoodItemValue();
 }
 
 void FoodItem::setWeight(int weight) {
@@ -18,20 +19,25 @@ void FoodItem::setWeight(int weight) {
 }
 
 QVector<int> FoodItem::getFoodItemValue() {
-    QVector<int> foodItemValue(_foodItemValue);
+    QVector<int> foodItemValue(_factsCount);
 
-    if (_weight = 0)
+    if (!_weight)
         return foodItemValue.fill(0);
 
     if (_weight != 100)
-        foreach (int fact, foodItemValue)
-            fact = fact * _weight / 100;
+        for (int i = 0; i < _factsCount; i++)
+            foodItemValue[i] = _foodItemValue[i] * _weight / 100;
+    else
+        return _foodItemValue;
 
     return foodItemValue;
 }
 
 QString FoodItem::name() {
     return _name;
+}
+int FoodItem::rowId() {
+    return _rowId;
 }
 
 void FoodItem::setFoodItemValue() {
