@@ -9,7 +9,7 @@ class FoodItem : public QObject {
 
 public:
     FoodItem(QObject *parent = 0);
-    FoodItem(int rowId, int weight,QObject *parent = 0);
+    FoodItem(int rowId, int weight, QString name, QObject *parent = 0);
     QVector<int> getFoodItemValue();
     QString name();
     int rowId();

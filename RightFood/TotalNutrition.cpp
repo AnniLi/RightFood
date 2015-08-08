@@ -5,8 +5,8 @@ TotalNutrition::TotalNutrition(QObject *parent) : QObject(parent) {
 
 }
 
-void TotalNutrition::add(int rowId, int weight) {
-    FoodItem* foodItem = new FoodItem(rowId, weight);
+void TotalNutrition::add(int rowId, int weight, QString name) {
+    FoodItem* foodItem = new FoodItem(rowId, weight, name);
     connect(foodItem, SIGNAL(weightChanged()), this, SLOT(setTotalNutrion()));
     _rationList.push_back(foodItem);
     emit rationChanged();
@@ -27,11 +27,11 @@ QVector<int> TotalNutrition::getTotalNutrion() {
     return _totalNutrition;
 }
 
-void TotalNutrition::remove(int rowId) {
+void TotalNutrition::remove(QString name) {
     for (int i = 0; i < _rationList.count(); i++) {
         if (_rationList[i] == nullptr)
             break;
-        if (_rationList[i]->rowId() == rowId) {
+        if (_rationList[i]->name() == name) {
             FoodItem* foodItem = _rationList[i];
             disconnect(foodItem, SIGNAL(weightChanged()), this, SLOT(setTotalNutrion()));
             delete foodItem;

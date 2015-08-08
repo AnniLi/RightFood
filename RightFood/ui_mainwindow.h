@@ -248,7 +248,9 @@ public:
 
         label_14 = new QLabel(formLayoutWidget);
         label_14->setObjectName(QStringLiteral("label_14"));
-        label_14->setFont(font1);
+        QFont font2;
+        font2.setPointSize(10);
+        label_14->setFont(font2);
 
         formLayout->setWidget(6, QFormLayout::LabelRole, label_14);
 
@@ -364,7 +366,11 @@ public:
 
         label_25 = new QLabel(formLayoutWidget_2);
         label_25->setObjectName(QStringLiteral("label_25"));
-        label_25->setFont(font1);
+        QFont font3;
+        font3.setPointSize(8);
+        font3.setBold(false);
+        font3.setWeight(50);
+        label_25->setFont(font3);
 
         formLayout_2->setWidget(2, QFormLayout::LabelRole, label_25);
 
@@ -424,7 +430,11 @@ public:
 
         label_30 = new QLabel(formLayoutWidget_2);
         label_30->setObjectName(QStringLiteral("label_30"));
-        label_30->setFont(font1);
+        QFont font4;
+        font4.setPointSize(10);
+        font4.setBold(false);
+        font4.setWeight(50);
+        label_30->setFont(font4);
 
         formLayout_2->setWidget(7, QFormLayout::LabelRole, label_30);
 
@@ -489,11 +499,11 @@ public:
         label_38 = new QLabel(centralWidget);
         label_38->setObjectName(QStringLiteral("label_38"));
         label_38->setGeometry(QRect(800, 70, 217, 24));
-        QFont font2;
-        font2.setPointSize(15);
-        font2.setBold(true);
-        font2.setWeight(75);
-        label_38->setFont(font2);
+        QFont font5;
+        font5.setPointSize(15);
+        font5.setBold(true);
+        font5.setWeight(75);
+        label_38->setFont(font5);
         gridLayoutWidget = new QWidget(centralWidget);
         gridLayoutWidget->setObjectName(QStringLiteral("gridLayoutWidget"));
         gridLayoutWidget->setGeometry(QRect(800, 100, 251, 31));
@@ -504,9 +514,9 @@ public:
         gridLayout->setContentsMargins(0, 0, 0, 0);
         lineEdit = new QLineEdit(gridLayoutWidget);
         lineEdit->setObjectName(QStringLiteral("lineEdit"));
-        QFont font3;
-        font3.setItalic(true);
-        lineEdit->setFont(font3);
+        QFont font6;
+        font6.setItalic(true);
+        lineEdit->setFont(font6);
 
         gridLayout->addWidget(lineEdit, 0, 1, 1, 1);
 
@@ -557,7 +567,7 @@ public:
         label_11->setText(QApplication::translate("MainWindow", "B3", 0));
         label_12->setText(QApplication::translate("MainWindow", "B5", 0));
         label_13->setText(QApplication::translate("MainWindow", "B6", 0));
-        label_14->setText(QApplication::translate("MainWindow", "B7", 0));
+        label_14->setText(QApplication::translate("MainWindow", "B7?", 0));
         label_15->setText(QApplication::translate("MainWindow", "B9", 0));
         label_16->setText(QApplication::translate("MainWindow", "B12", 0));
         label_17->setText(QApplication::translate("MainWindow", "C", 0));
@@ -575,7 +585,7 @@ public:
 #ifndef QT_NO_WHATSTHIS
         label_25->setWhatsThis(QApplication::translate("MainWindow", "\320\231\320\276\320\264", 0));
 #endif // QT_NO_WHATSTHIS
-        label_25->setText(QApplication::translate("MainWindow", "I", 0));
+        label_25->setText(QApplication::translate("MainWindow", "I ?", 0));
 #ifndef QT_NO_WHATSTHIS
         label_26->setWhatsThis(QApplication::translate("MainWindow", "\320\232\320\260\320\273\320\270\320\271", 0));
 #endif // QT_NO_WHATSTHIS

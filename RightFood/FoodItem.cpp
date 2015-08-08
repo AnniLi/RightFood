@@ -5,9 +5,8 @@ FoodItem::FoodItem(QObject *parent) : QObject(parent) {
     setFoodItemValue();
 }
 
-FoodItem::FoodItem(int rowId, int weight, QObject *parent)
-    :QObject(parent),_rowId(rowId), _weight(weight) {
-    _name = "";
+FoodItem::FoodItem(int rowId, int weight, QString name, QObject *parent)
+    :QObject(parent),_rowId(rowId), _weight(weight), _name(name) {
     setFoodItemValue();
 }
 

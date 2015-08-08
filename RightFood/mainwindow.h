@@ -22,6 +22,9 @@ public:
     ~MainWindow();
     void foodAdedToRation(int, QString, int);
 
+public slots:
+    void removeFoodItem(QString name, int column);
+
 private slots:
     void on_toolButton_clicked();
     void setBars();
@@ -37,7 +40,7 @@ private:
 
     void barsInit();
     void getBars();
-
+    bool eventFilter(QObject *obj, QEvent *event);
     QAbstractItemModel *modelFromFile();
     QCompleter *completer;
 };

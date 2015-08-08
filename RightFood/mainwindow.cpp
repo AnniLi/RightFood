@@ -8,6 +8,7 @@
 #include <QInputDialog>
 #include <QStandardItemModel>
 #include <QPointer>
+#include <QKeyEvent>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -31,6 +32,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tableWidget->setColumnWidth(0, 200);
     ui->tableWidget->setColumnWidth(1, 49);
     ui->tableWidget->setColumnHidden(2, 1);
+    ui->tableWidget->installEventFilter(this);
+
     connect(_totalNutrion, SIGNAL(totalNutritionChanged()), this, SLOT(setBars()));
 }
 
@@ -38,8 +41,20 @@ MainWindow::~MainWindow(){
     delete ui;
 }
 
+bool MainWindow::eventFilter(QObject *obj, QEvent *event) {
+    if (event->type() == QEvent::KeyPress && obj == ui->tableWidget) {
+        QKeyEvent *keyEvent = (QKeyEvent*)event;
+        if (keyEvent->key() == Qt::Key_Delete) {
+            int sel = ui->tableWidget->selectionModel()->currentIndex().row();
+            QString nam = ui->tableWidget->item(sel, 0)->text();
+            removeFoodItem(nam, sel);
+        }
+    }
+    return QMainWindow::eventFilter(obj, event);
+}
+
 void MainWindow::foodAdedToRation(int rowId, QString name, int weight) {
-    _totalNutrion->add(rowId, weight);
+    _totalNutrion->add(rowId, weight, name);
 
     //table widget
     int rows = ui->tableWidget->rowCount();
@@ -153,6 +168,11 @@ void MainWindow::setBars() {
                 totalNutrion[i] = _nutritionBarList[i]->maximum();
             _nutritionBarList[i]->setValue(totalNutrion[i]);
         }
+}
+
+void MainWindow::removeFoodItem(QString name, int column) {
+    ui->tableWidget->removeRow(column);
+    _totalNutrion->remove(name);
 }
 
 
