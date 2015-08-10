@@ -62,6 +62,7 @@ void MainWindow::foodAdedToRation(int rowId, QString name, int weight) {
 
     QTableWidgetItem *item;
     item = new QTableWidgetItem(QString("%1").arg(weight));
+    item->setFlags(item->flags() & ~Qt::ItemIsEditable);
     item->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
     ui->tableWidget->setItem(rows, 1, item);
 

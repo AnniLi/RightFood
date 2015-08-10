@@ -836,11 +836,14 @@
    <widget class="QTableWidget" name="tableWidget">
     <property name="geometry">
      <rect>
-      <x>800</x>
+      <x>790</x>
       <y>150</y>
-      <width>251</width>
-      <height>192</height>
+      <width>261</width>
+      <height>441</height>
      </rect>
+    </property>
+    <property name="horizontalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
     </property>
     <property name="showGrid">
      <bool>false</bool>

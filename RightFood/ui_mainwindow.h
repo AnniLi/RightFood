@@ -527,7 +527,8 @@ public:
 
         tableWidget = new QTableWidget(centralWidget);
         tableWidget->setObjectName(QStringLiteral("tableWidget"));
-        tableWidget->setGeometry(QRect(800, 150, 251, 192));
+        tableWidget->setGeometry(QRect(790, 150, 261, 441));
+        tableWidget->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         tableWidget->setShowGrid(false);
         tableWidget->setCornerButtonEnabled(false);
         tableWidget->setColumnCount(0);
