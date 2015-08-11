@@ -25,6 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
     completer->setCaseSensitivity(Qt::CaseInsensitive);
     completer->setCompletionMode(QCompleter::PopupCompletion);
     ui->lineEdit->setCompleter(completer);
+    ui->lineEdit->installEventFilter(this);
 
     ui->tableWidget->insertColumn(0);
     ui->tableWidget->insertColumn(1);
@@ -49,6 +50,11 @@ bool MainWindow::eventFilter(QObject *obj, QEvent *event) {
             QString nam = ui->tableWidget->item(sel, 0)->text();
             removeFoodItem(nam, sel);
         }
+    }
+    if (event->type() == QEvent::KeyPress && obj == ui->lineEdit) {
+        QKeyEvent *keyEvent = (QKeyEvent*)event;
+        if (keyEvent->key() == Qt::Key_Return)
+            on_toolButton_clicked();
     }
     return QMainWindow::eventFilter(obj, event);
 }
